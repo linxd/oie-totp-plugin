@@ -1,9 +1,13 @@
 {
     "id": "totpmfa",
-    "name": "TOTP MFA",
+    "name": "TOTP 多因素认证",
     "version": "0.3.2",
     "author": "Chris Gibson",
-    "description": "Two-Factor Authentication settings tab: list TOTP-enrolled users and reset a user's enrollment (lost-device recovery).",
-    "oie": { "apiMin": "4.6" },
-    "client": { "entry": "web/plugin.js" }
+    "description": "两步验证设置标签页：列表已注册 TOTP 的用户，并重置用户的注册（设备丢失恢复）。",
+    "oie": {
+        "apiMin": "4.6"
+    },
+    "client": {
+        "entry": "web/plugin.js"
+    }
 }

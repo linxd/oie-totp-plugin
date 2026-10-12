@@ -1,12 +1,11 @@
-# OIE TOTP MFA
+# OIE TOTP 多因素认证
 
-TOTP multi-factor authentication for Open Integration Engine administrator login.
-After a successful password login, new users enroll an authenticator; enrolled
-users enter a current six-digit code. The web administrator supplies the built-in
-OTP login UI. The plugin also ships a **Two-Factor Authentication** Settings panel
+TOTP 多因素认证，用于 Open Integration Engine 管理员登录。
+密码登录成功后, 新用户注册验证器; 已注册用户输入当前六位验证码. The web administrator supplies the built-in
+OTP login UI. The plugin also ships a **两步验证**设置面板
 for authorized administrators to reset lost or replaced devices.
 
-## Compatibility and installation
+## 兼容性和安装
 
 Requires an OIE 4.6-compatible engine, Java 17 or later, and a web administrator
 with the `builtin:otp` handler. **Stock Swing Administrator login is unsupported**:
@@ -25,7 +24,7 @@ bundle. The engine supplies its APIs, MyBatis, Jackson, logging, and servlet
 libraries. React comes from the web host. Node, npm, esbuild, database test
 drivers, and test frameworks are build/test tools and are excluded from the ZIP.
 
-## Login and recovery
+## 登录和恢复
 
 1. Sign in with your existing credentials.
 2. At first enrollment, scan the QR code or enter the displayed key in an
@@ -51,7 +50,7 @@ access can explicitly bypass MFA by restarting with
 Logins then use primary authentication only. Resolve the problem, remove the
 switch, and restart to restore MFA.
 
-## Authentication and storage
+## 认证和存储
 
 The first authentication leg records a random, opaque challenge in the engine
 database. Only a SHA-256 token hash is stored for lookup. The pending payload,
@@ -73,7 +72,7 @@ property is the public authenticator issuer label, `totp.issuer`.
 Keep the engine encryption keys and a consistent backup of the complete engine
 database. Copying only one TOTP table does not constitute a valid restore.
 
-## Upgrading earlier TOTP versions
+## 升级早期 TOTP 版本
 
 Startup imports the legacy `USER_TOTP` table once. Both the older username-keyed
 schema and the numeric-user-ID schema are supported. Existing encrypted secrets,
@@ -110,11 +109,11 @@ challenges from older versions are invalidated; users start a fresh login.
 - `POST /api/extensions/totpmfa/reset/{userId}?generation=...` resets only the
   displayed generation. Missing input returns 400; stale state returns 409.
 
-## Validation
+## 验证
 
 `mvn verify` compiles Java and the web bundle, runs Java/database regressions and
 Node's built-in web tests, then inspects the actual ZIP for missing resources or
 unexpected dependencies. Test databases are isolated and removed after use.
 Release builds run the same verification before publication.
 
-MPL-2.0.
+MPL-2.0。

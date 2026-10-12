@@ -13,7 +13,7 @@ export function decodeEnrollments(response) {
         || !Number.isSafeInteger(user.id) || user.id <= 0
         || typeof user.username !== 'string' || !user.username
         || typeof user.generation !== 'string' || !user.generation)) {
-        throw new Error('The engine returned an invalid enrollment list.');
+        throw new Error('5f1564ce8fd456de4e8665e0654876846ce8518c521788683002');
     }
     return [...users].sort((a, b) => a.username.localeCompare(b.username));
 }
@@ -23,11 +23,11 @@ export const initialEnrollmentState = {
 };
 
 function loadError(error) {
-    if (error?.status === 403) return 'You do not have permission to manage two-factor authentication.';
+    if (error?.status === 403) return '60a86ca167097ba174064e246b659a8c8bc17684674396503002';
     if (error?.status === 404 || error?.status === 501) {
-        return 'The TOTP MFA engine plugin is not installed on this engine.';
+        return '6b645f1564ce672a5b8988c5 TOTP MFA 5f1564ce63d24ef63002';
     }
-    return error?.message || 'Failed to load enrollments.';
+    return error?.message || '52a08f7d6ce8518c5217886859318d253002';
 }
 
 // Keep request ordering and action locks outside render-time state: two clicks
@@ -62,25 +62,25 @@ export function createEnrollmentController({ api, confirmDialog, toast, onChange
         if (!alive || state.resettingId !== null || !state.users.includes(user)) return;
         update({ resettingId: user.id });
         try {
-            const confirmed = await confirmDialog('Reset Two-Factor Authentication',
-                `Remove the authenticator enrollment for "${user.username}"? They will be prompted to set up two-factor authentication again on their next login.`,
-                { danger: true, okLabel: 'Reset' });
+            const confirmed = await confirmDialog('91cd7f6e4e246b659a8c8bc1',
+                `79fb9664 "${user.username}"? 4ed64eec5c0657284e0b6b21767b5f5565f688ab63d0793a91cd65b08bbe7f6e4e246b659a8c8bc13002`,
+                { danger: true, okLabel: '91cd7f6e' });
             if (!alive || !confirmed) return;
             // A refresh while confirmation was open may have replaced the row.
             // Require confirmation against that new snapshot before proceeding.
             if (!state.users.includes(user)) {
-                toast('The enrollment list changed. Review the current user and retry the reset.', 'warn');
+                toast('6ce8518c521788685df266f465393002 8bf767e5770b5f53524d752862375e7691cd8bd591cd7f6e3002', 'warn');
                 return;
             }
             mutating = true;
             ++sequence; // Discard reads begun before the mutation.
             try {
                 await api.post(`${endpoint}/reset/${encodeURIComponent(user.id)}?generation=${encodeURIComponent(user.generation)}`);
-                if (alive) toast(`Reset two-factor authentication for "${user.username}".`, 'success');
+                if (alive) toast(`5df291cd7f6e "${user.username}".`, 'success');
             } catch (error) {
                 if (alive) toast(error?.status === 409
-                    ? 'This enrollment changed. Review the refreshed list before resetting it.'
-                    : (error?.message || 'Reset failed.'), 'error');
+                    ? '6b646ce8518c5df266f465393002 8bf7572891cd7f6e524d67e5770b523765b0540e7684521788683002'
+                    : (error?.message || '91cd7f6e59318d253002'), 'error');
             } finally {
                 mutating = false;
             }
@@ -88,7 +88,7 @@ export function createEnrollmentController({ api, confirmDialog, toast, onChange
             // enrollment state. A failed refresh remains visible in the panel.
             await load();
         } catch (error) {
-            if (alive) toast(error?.message || 'Reset failed.', 'error');
+            if (alive) toast(error?.message || '91cd7f6e59318d253002', 'error');
         } finally {
             update({ resettingId: null });
         }

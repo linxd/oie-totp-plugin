@@ -1,10 +1,12 @@
 {
     "schemaVersion": 1,
     "id": "totpmfa",
-    "name": "TOTP MFA",
-    "description": "TOTP (RFC 6238) multi-factor authentication for administrator login. Users self-enroll on first login (QR / key + code); every login after asks for the current code. Per-user secrets are stored encrypted in the engine database (MyBatis) with single-use challenges, transactional replay protection, and persistent attempt limits. Includes a Settings tab to reset a user for lost-device recovery.",
+    "name": "TOTP 多因素认证",
+    "description": "TOTP（RFC 6238）管理员登录多因素认证。用户在首次登录时自助注册（二维码/密钥 + 验证码）；此后每次登录均需输入当前验证码。每个用户的密钥加密存储在引擎数据库（MyBatis）中，支持一次性挑战、事务重放保护和持久化尝试次数限制。包含设置标签页，可重置用户以处理设备丢失恢复。",
     "type": "plugin",
-    "ui": ["web"],
+    "ui": [
+        "web"
+    ],
     "version": "0.3.2",
     "minEngineVersion": "4.6.0",
     "maxEngineVersion": null,
